@@ -1,0 +1,68 @@
+GAME CONCEPT OVERVIEW
+---------------------
+Genre: Dark fantasy, turn-based RPG (ATB system), multiplayer
+Perspective: 2D pixel art (top-down or side-view)
+Inspirations: Darkest Dungeon, Final Fantasy VIII, Koudelka, WoW Classic
+Core identity: Classless dark RPG focused on player-driven builds and cooperative dungeon exploration.
+
+CORE GAMEPLAY LOOP
+------------------
+1. Travel between cities through procedurally generated paths.
+2. Encounter enemies scaled to the region level.
+3. Engage in turn-based ATB battles with cinematic entry animations.
+4. Collect gear, resources, and skills.
+5. Return to cities to rest, trade, and prepare for next expeditions.
+
+WORLD & EXPLORATION
+-------------------
+- Cities: Safe hubs for healing, trading, and grouping.
+- Dungeons: Procedurally generated areas with traps, enemies, and loot.
+- Overworld: Randomly generated paths between cities, dark atmosphere, gothic tone.
+- Multiplayer: Party-based exploration where only the leader moves to next segments.
+  Other players can search for resources while waiting.
+
+CHARACTER SYSTEM (CLASSLESS)
+----------------------------
+- Full customization: posture, corpulence, hair, facial hair, skin color.
+- No classes: players develop through attributes, skills, and magic trees.
+- Skill & Magic Trees: contain active and passive abilities, including speed buffs/debuffs.
+- Trinkets: don’t give stats but enhance or modify specific skills/magic, guiding build direction.
+
+STATS
+-----
+Primary: HP, Mana, Stamina
+Attributes: Strength, Agility, Intelligence, Spirit, Defense, Luck, Speed
+Derived: Crit chance, Evasion, Spell Power, Cooldown Reduction, Regen (HP & Mana)
+
+EQUIPMENT
+---------
+Visible gear on 2D sprite (equipment changes sprite appearance).
+Slots: Head, Chest, Legs, Hands, Feet, Back, Main-hand, Off-hand, Rings(2), Trinkets(2), Neck
+Gear: Random rolls for stats/affixes, rarity tiers (Common → Legendary)
+Trinkets: Modify specific skills/magic rather than stats.
+
+COMBAT SYSTEM (ATB)
+-------------------
+- Active Time Battle system influenced by Speed stat.
+- Turn-based fights with cinematic transitions.
+- Actions: Basic Attack, Skills, Magic, Items.
+- Skills have cooldowns; magic uses mana.
+- Status effects: Bleed, Burn, Freeze, Curse, Slow, Haste, etc.
+- HP/Mana regeneration per turn.
+
+PROGRESSION & LOOT
+------------------
+- Regions have unique enemies, visuals, and loot tables.
+- Gear drops with variable rolls and rarity.
+- Skills/magic can be found, learned, or earned.
+- Build freedom: player choices define playstyle.
+
+ART & ATMOSPHERE
+----------------
+2D pixel art dark fantasy aesthetic.
+Visual style: moody, atmospheric, gothic ruins with pixel art charm.
+UI: minimalistic with fantasy/gothic textures.
+
+DESIGN PHILOSOPHY
+-----------------
+"Your build is your story." Freedom over predefined roles. Every choice shapes your path.
