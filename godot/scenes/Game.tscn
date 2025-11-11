@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://c0dt7jqwtnbr"]
+[gd_scene load_steps=6 format=3 uid="uid://c0dt7jqwtnbr"]
 
 [ext_resource type="PackedScene" uid="uid://b1c2d3e4f5g6h" path="res://scenes/Character.tscn" id="1_1"]
 [ext_resource type="PackedScene" uid="uid://d3e4f5g6h7i8j" path="res://scenes/PauseMenu.tscn" id="2_1"]
+[ext_resource type="PackedScene" uid="uid://e4f5g6h7i8j9k" path="res://scenes/InventoryMenu.tscn" id="3_1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wall_horizontal"]
 size = Vector2(800, 20)
@@ -127,3 +128,5 @@ zoom = Vector2(0.5, 0.5)
 [node name="Character" parent="." instance=ExtResource("1_1")]
 
 [node name="PauseMenu" parent="." instance=ExtResource("2_1")]
+
+[node name="InventoryMenu" parent="." instance=ExtResource("3_1")]

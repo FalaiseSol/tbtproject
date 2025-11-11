@@ -1,0 +1,419 @@
+[gd_scene load_steps=2 format=3 uid="uid://81au4kxx1ois"]
+
+[ext_resource type="Script" uid="uid://4wq8yb5o1tag" path="res://scripts/ui/inventory_menu.gd" id="1_1"]
+
+[node name="InventoryMenu" type="CanvasLayer"]
+script = ExtResource("1_1")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Overlay" type="ColorRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5)
+
+[node name="CharacterViewContainer" type="Control" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -150.0
+offset_right = -100.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CharacterView" type="ColorRect" parent="Control/CharacterViewContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.2, 0.2, 0.2, 1)
+
+[node name="HeadSlot" type="ColorRect" parent="Control/CharacterViewContainer"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.135
+anchor_top = 0.067
+anchor_right = -0.135
+anchor_bottom = 0.067
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+color = Color(0.3, 0.3, 0.3, 1)
+
+[node name="NeckSlot" type="ColorRect" parent="Control/CharacterViewContainer"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.135
+anchor_top = 0.224
+anchor_right = -0.135
+anchor_bottom = 0.224
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+color = Color(0.3, 0.3, 0.3, 1)
+
+[node name="BackSlot" type="ColorRect" parent="Control/CharacterViewContainer"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.135
+anchor_top = 0.38
+anchor_right = -0.135
+anchor_bottom = 0.38
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+color = Color(0.3, 0.3, 0.3, 1)
+
+[node name="ChestSlot" type="ColorRect" parent="Control/CharacterViewContainer"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.135
+anchor_top = 0.537
+anchor_right = -0.135
+anchor_bottom = 0.537
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+color = Color(0.3, 0.3, 0.3, 1)
+
+[node name="WristSlot" type="ColorRect" parent="Control/CharacterViewContainer"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.135
+anchor_top = 0.694
+anchor_right = -0.135
+anchor_bottom = 0.694
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+color = Color(0.3, 0.3, 0.3, 1)
+
+[node name="MainHandSlot" type="ColorRect" parent="Control/CharacterViewContainer"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.34
+anchor_top = 1.117
+anchor_right = 0.34
+anchor_bottom = 1.117
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 0
+color = Color(0.3, 0.3, 0.3, 1)
+
+[node name="OffHandSlot" type="ColorRect" parent="Control/CharacterViewContainer"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.7
+anchor_top = 1.113
+anchor_right = 0.7
+anchor_bottom = 1.113
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+color = Color(0.3, 0.3, 0.3, 1)
+
+[node name="HandsSlot" type="ColorRect" parent="Control/CharacterViewContainer"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.135
+anchor_top = 0.851
+anchor_right = -0.135
+anchor_bottom = 0.851
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+color = Color(0.3, 0.3, 0.3, 1)
+
+[node name="LegsSlot" type="ColorRect" parent="Control/CharacterViewContainer"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.135
+anchor_top = 0.067
+anchor_right = 1.135
+anchor_bottom = 0.067
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+color = Color(0.3, 0.3, 0.3, 1)
+
+[node name="FeetSlot" type="ColorRect" parent="Control/CharacterViewContainer"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.135
+anchor_top = 0.224
+anchor_right = 1.135
+anchor_bottom = 0.224
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+color = Color(0.3, 0.3, 0.3, 1)
+
+[node name="Ring1Slot" type="ColorRect" parent="Control/CharacterViewContainer"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.135
+anchor_top = 0.381
+anchor_right = 1.135
+anchor_bottom = 0.381
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+color = Color(0.3, 0.3, 0.3, 1)
+
+[node name="Ring2Slot" type="ColorRect" parent="Control/CharacterViewContainer"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.135
+anchor_top = 0.537
+anchor_right = 1.135
+anchor_bottom = 0.537
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+color = Color(0.3, 0.3, 0.3, 1)
+
+[node name="Trinket1Slot" type="ColorRect" parent="Control/CharacterViewContainer"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.135
+anchor_top = 0.694
+anchor_right = 1.135
+anchor_bottom = 0.694
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+color = Color(0.3, 0.3, 0.3, 1)
+
+[node name="Trinket2Slot" type="ColorRect" parent="Control/CharacterViewContainer"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.135
+anchor_top = 0.851
+anchor_right = 1.135
+anchor_bottom = 0.851
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+color = Color(0.3, 0.3, 0.3, 1)
+
+[node name="ItemSlotsContainer" type="GridContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 50.0
+offset_top = 50.0
+offset_right = 450.0
+offset_bottom = 190.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 10
+
+[node name="ItemSlot1" type="ColorRect" parent="Control/ItemSlotsContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+color = Color(0.3, 0.3, 0.3, 1)
+
+[node name="ItemSlot2" type="ColorRect" parent="Control/ItemSlotsContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+color = Color(0.3, 0.3, 0.3, 1)
+
+[node name="ItemSlot3" type="ColorRect" parent="Control/ItemSlotsContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+color = Color(0.3, 0.3, 0.3, 1)
+
+[node name="ItemSlot4" type="ColorRect" parent="Control/ItemSlotsContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+color = Color(0.3, 0.3, 0.3, 1)
+
+[node name="ItemSlot5" type="ColorRect" parent="Control/ItemSlotsContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+color = Color(0.3, 0.3, 0.3, 1)
+
+[node name="ItemSlot6" type="ColorRect" parent="Control/ItemSlotsContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+color = Color(0.3, 0.3, 0.3, 1)
+
+[node name="ItemSlot7" type="ColorRect" parent="Control/ItemSlotsContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+color = Color(0.3, 0.3, 0.3, 1)
+
+[node name="ItemSlot8" type="ColorRect" parent="Control/ItemSlotsContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+color = Color(0.3, 0.3, 0.3, 1)
+
+[node name="ItemSlot9" type="ColorRect" parent="Control/ItemSlotsContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+color = Color(0.3, 0.3, 0.3, 1)
+
+[node name="ItemSlot10" type="ColorRect" parent="Control/ItemSlotsContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+color = Color(0.3, 0.3, 0.3, 1)
+
+[node name="ItemSlot11" type="ColorRect" parent="Control/ItemSlotsContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+color = Color(0.3, 0.3, 0.3, 1)
+
+[node name="ItemSlot12" type="ColorRect" parent="Control/ItemSlotsContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+color = Color(0.3, 0.3, 0.3, 1)
+
+[node name="ItemSlot13" type="ColorRect" parent="Control/ItemSlotsContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+color = Color(0.3, 0.3, 0.3, 1)
+
+[node name="ItemSlot14" type="ColorRect" parent="Control/ItemSlotsContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+color = Color(0.3, 0.3, 0.3, 1)
+
+[node name="ItemSlot15" type="ColorRect" parent="Control/ItemSlotsContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+color = Color(0.3, 0.3, 0.3, 1)
+
+[node name="ItemSlot16" type="ColorRect" parent="Control/ItemSlotsContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+color = Color(0.3, 0.3, 0.3, 1)
+
+[node name="ItemSlot17" type="ColorRect" parent="Control/ItemSlotsContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+color = Color(0.3, 0.3, 0.3, 1)
+
+[node name="ItemSlot18" type="ColorRect" parent="Control/ItemSlotsContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+color = Color(0.3, 0.3, 0.3, 1)
+
+[node name="ItemSlot19" type="ColorRect" parent="Control/ItemSlotsContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+color = Color(0.3, 0.3, 0.3, 1)
+
+[node name="ItemSlot20" type="ColorRect" parent="Control/ItemSlotsContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+color = Color(0.3, 0.3, 0.3, 1)
+
+[node name="ItemSlot21" type="ColorRect" parent="Control/ItemSlotsContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+color = Color(0.3, 0.3, 0.3, 1)
+
+[node name="ItemSlot22" type="ColorRect" parent="Control/ItemSlotsContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+color = Color(0.3, 0.3, 0.3, 1)
+
+[node name="ItemSlot23" type="ColorRect" parent="Control/ItemSlotsContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+color = Color(0.3, 0.3, 0.3, 1)
+
+[node name="ItemSlot24" type="ColorRect" parent="Control/ItemSlotsContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+color = Color(0.3, 0.3, 0.3, 1)
+
+[node name="ItemSlot25" type="ColorRect" parent="Control/ItemSlotsContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+color = Color(0.3, 0.3, 0.3, 1)
+
+[node name="ItemSlot26" type="ColorRect" parent="Control/ItemSlotsContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+color = Color(0.3, 0.3, 0.3, 1)
+
+[node name="ItemSlot27" type="ColorRect" parent="Control/ItemSlotsContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+color = Color(0.3, 0.3, 0.3, 1)
+
+[node name="ItemSlot28" type="ColorRect" parent="Control/ItemSlotsContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+color = Color(0.3, 0.3, 0.3, 1)
+
+[node name="ItemSlot29" type="ColorRect" parent="Control/ItemSlotsContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+color = Color(0.3, 0.3, 0.3, 1)
+
+[node name="ItemSlot30" type="ColorRect" parent="Control/ItemSlotsContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+color = Color(0.3, 0.3, 0.3, 1)
+
+[node name="ExitButton" type="Button" parent="Control"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -50.0
+offset_right = 120.0
+offset_bottom = -20.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Exit"
