@@ -50,14 +50,14 @@ const _AUTH_PROVIDERS : String = "firebase/auth_providers"
 # These values can be found in your Firebase Project
 # See the README checked Github for how to access
 var _config : Dictionary = {
-	"apiKey": "",
-	"authDomain": "",
-	"databaseURL": "",
-	"projectId": "",
-	"databaseName": "",
-	"storageBucket": "",
-	"messagingSenderId": "",
-	"appId": "",
+	"apiKey": "AIzaSyAxdwaGXshLY-mc9YRpKZJEKrJjTOVg-tQ",
+	"authDomain": "tbtproject-d415a.firebaseapp.com",
+	"databaseURL": "https://tbtproject-d415a-default-rtdb.europe-west1.firebasedatabase.app",
+	"projectId": "tbtproject-d415a",
+	"databaseName": "(default)",
+	"storageBucket": "tbtproject-d415a.firebasestorage.app",
+	"messagingSenderId": "722413064558",
+	"appId": "1:722413064558:web:f14dce7d80507c06bd717f",
 	"measurementId": "",
 	"clientId": "",
 	"clientSecret" : "",
