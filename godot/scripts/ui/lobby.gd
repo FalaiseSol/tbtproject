@@ -180,11 +180,15 @@ func _on_groups_update(resource: FirebaseResource) -> void:
 		_refresh_member_list()
 
 func _on_groups_patch(resource: FirebaseResource) -> void:
-	var group_id = resource.key
-	if resource.data is Dictionary:
-		if not _groups.has(group_id):
-			_groups[group_id] = { "host": "", "name": "", "members": {}, "open": true }
-		_merge_group(group_id, resource.data)
+	var parts = resource.key.split("/", false)
+	var group_id = parts[0]
+	if not _groups.has(group_id):
+		_groups[group_id] = { "host": "", "name": "", "members": {}, "open": true }
+	if parts.size() == 1:
+		if resource.data is Dictionary:
+			_merge_group(group_id, resource.data)
+	elif parts.size() == 2 and parts[1] == "members" and resource.data is Dictionary:
+		_merge_group(group_id, { "members": resource.data })
 	_refresh_group_list()
 	if _viewing_group_id == group_id:
 		_refresh_member_list()
@@ -353,7 +357,7 @@ func _on_group_item_clicked(index: int, _pos: Vector2, mouse_button: int) -> voi
 	if g.get("members", {}).has(GameManager.current_user_id):
 		_log("You are already in that group.")
 		return
-	_groups_ref.update(gid + "/members/" + GameManager.current_user_id, GameManager.current_username)
+	_groups_ref.update(gid + "/members", { GameManager.current_user_id: GameManager.current_username })
 	_my_group_id = gid
 	_refresh_solo_button()
 	_log("You joined \"%s\"." % g.get("name", gid))
@@ -482,7 +486,7 @@ func _on_invite_accepted() -> void:
 		_log("That group is now full.")
 		_clear_invite(group_id)
 		return
-	_groups_ref.update(group_id + "/members/" + GameManager.current_user_id, GameManager.current_username)
+	_groups_ref.update(group_id + "/members", { GameManager.current_user_id: GameManager.current_username })
 	_my_group_id = group_id
 	_refresh_solo_button()
 	_log("You joined %s's group." % _pending_invite["from_name"])
