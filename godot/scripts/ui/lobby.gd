@@ -353,7 +353,7 @@ func _on_group_item_clicked(index: int, _pos: Vector2, mouse_button: int) -> voi
 	if g.get("members", {}).has(GameManager.current_user_id):
 		_log("You are already in that group.")
 		return
-	_groups_ref.update(gid + "/members", { GameManager.current_user_id: GameManager.current_username })
+	_groups_ref.update(gid + "/members/" + GameManager.current_user_id, GameManager.current_username)
 	_my_group_id = gid
 	_refresh_solo_button()
 	_log("You joined \"%s\"." % g.get("name", gid))
@@ -482,7 +482,7 @@ func _on_invite_accepted() -> void:
 		_log("That group is now full.")
 		_clear_invite(group_id)
 		return
-	_groups_ref.update(group_id + "/members", { GameManager.current_user_id: GameManager.current_username })
+	_groups_ref.update(group_id + "/members/" + GameManager.current_user_id, GameManager.current_username)
 	_my_group_id = group_id
 	_refresh_solo_button()
 	_log("You joined %s's group." % _pending_invite["from_name"])
@@ -495,7 +495,7 @@ func _on_invite_declined() -> void:
 	_clear_invite(_pending_invite["group_id"])
 
 func _clear_invite(group_id: String) -> void:
-	_invites_ref.delete(GameManager.current_user_id + "/" + group_id)
+	_invites_ref.delete(group_id)
 	_pending_invite = {}
 
 # ── Leave group ───────────────────────────────────────────────────────────────
