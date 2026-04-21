@@ -317,7 +317,7 @@ func _on_group_name_submitted(new_name: String) -> void:
 		return
 	if _groups[_viewing_group_id].get("host", "") != GameManager.current_user_id:
 		return
-	_groups_ref.update(_viewing_group_id + "/name", { "name": new_name })
+	_groups_ref.update(_viewing_group_id, { "name": new_name })
 	_log("You renamed the group to \"%s\"." % new_name)
 
 func _on_open_toggle_pressed() -> void:
@@ -327,7 +327,7 @@ func _on_open_toggle_pressed() -> void:
 	if g.get("host", "") != GameManager.current_user_id:
 		return
 	var new_open = not g.get("open", true)
-	_groups_ref.update(_viewing_group_id + "/open", { "open": new_open })
+	_groups_ref.update(_viewing_group_id, { "open": new_open })
 	g["open"] = new_open
 	open_toggle_button.text = "Open: ON" if new_open else "Open: OFF"
 	_log("Group is now %s." % ("open" if new_open else "closed"))
