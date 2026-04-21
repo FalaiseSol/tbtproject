@@ -29,7 +29,10 @@ jobs:
       - name: Write firebase.env
         env:
           FIREBASE_ENV: ${{ secrets.FIREBASE_ENV }}
-        run: printf '%s' "$FIREBASE_ENV" > godot/addons/godot-firebase/.env
+        run: |
+          printf '%s' "$FIREBASE_ENV" > godot/addons/godot-firebase/.env
+          echo "--- .env contents (databaseURL line only) ---"
+          grep databaseURL godot/addons/godot-firebase/.env
 
       - name: Export Windows build
         run: |
