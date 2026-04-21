@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bqj8k3x4m5n6p"]
+[gd_scene load_steps=3 format=3 uid="uid://bqj8k3x4m5n6p"]
 
 [ext_resource type="Script" path="res://scripts/ui/main_menu.gd" id="1_1"]
+[ext_resource type="Texture2D" path="res://assets/title.png" id="2_1"]
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -10,6 +11,22 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_1")
+
+[node name="TitleImage" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 0.0
+anchor_right = 0.5
+anchor_bottom = 0.0
+offset_left = -200.0
+offset_top = 40.0
+offset_right = 200.0
+offset_bottom = 200.0
+grow_horizontal = 2
+texture = ExtResource("2_1")
+expand_mode = 3
+stretch_mode = 5
 
 [node name="CenterContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -35,10 +52,13 @@ layout_mode = 2
 custom_minimum_size = Vector2(200, 50)
 text = "Login"
 
+
 [node name="OptionsButton" type="Button" parent="CenterContainer"]
 layout_mode = 2
 custom_minimum_size = Vector2(200, 50)
 text = "Options"
+disabled = true
+tooltip_text = "Coming soon"
 
 [node name="ExitButton" type="Button" parent="."]
 layout_mode = 1
@@ -54,3 +74,19 @@ offset_bottom = -20.0
 grow_horizontal = 0
 grow_vertical = 0
 text = "Exit"
+
+[node name="LoadingLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -60.0
+offset_top = 120.0
+offset_right = 60.0
+offset_bottom = 140.0
+grow_horizontal = 2
+text = "Loading..."
+horizontal_alignment = 1
+visible = false

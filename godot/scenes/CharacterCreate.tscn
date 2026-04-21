@@ -1,0 +1,274 @@
+[gd_scene load_steps=2 format=3 uid="uid://char_create_001"]
+
+[ext_resource type="Script" path="res://scripts/ui/character_create.gd" id="1_1"]
+
+[node name="CharacterCreate" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBox" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 12
+
+[node name="TopBar" type="HBoxContainer" parent="MarginContainer/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="NameBlock" type="VBoxContainer" parent="MarginContainer/VBox/TopBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.0
+theme_override_constants/separation = 4
+
+[node name="Title" type="Label" parent="MarginContainer/VBox/TopBar/NameBlock"]
+layout_mode = 2
+text = "Create Character"
+theme_override_font_sizes/font_size = 20
+
+[node name="NameRow" type="HBoxContainer" parent="MarginContainer/VBox/TopBar/NameBlock"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="NameLabel" type="Label" parent="MarginContainer/VBox/TopBar/NameBlock/NameRow"]
+layout_mode = 2
+text = "Name:"
+vertical_alignment = 1
+
+[node name="NameInput" type="LineEdit" parent="MarginContainer/VBox/TopBar/NameBlock/NameRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 30)
+placeholder_text = "Enter name..."
+max_length = 24
+
+[node name="WeaponBlock" type="PanelContainer" parent="MarginContainer/VBox/TopBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.0
+
+[node name="WeaponMargin" type="MarginContainer" parent="MarginContainer/VBox/TopBar/WeaponBlock"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_bottom = 6
+
+[node name="WeaponVBox" type="VBoxContainer" parent="MarginContainer/VBox/TopBar/WeaponBlock/WeaponMargin"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="WeaponHeaderRow" type="HBoxContainer" parent="MarginContainer/VBox/TopBar/WeaponBlock/WeaponMargin/WeaponVBox"]
+layout_mode = 2
+
+[node name="WeaponLabel" type="Label" parent="MarginContainer/VBox/TopBar/WeaponBlock/WeaponMargin/WeaponVBox/WeaponHeaderRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Weapon"
+theme_override_font_sizes/font_size = 13
+
+[node name="WeaponCardsRow" type="HBoxContainer" parent="MarginContainer/VBox/TopBar/WeaponBlock/WeaponMargin/WeaponVBox"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="WeaponInfoLabel" type="Label" parent="MarginContainer/VBox/TopBar/WeaponBlock/WeaponMargin/WeaponVBox"]
+layout_mode = 2
+text = "Select a weapon above."
+modulate = Color(0.6, 0.6, 0.6, 1)
+autowrap_mode = 3
+theme_override_font_sizes/font_size = 11
+
+[node name="BranchLabel" type="Label" parent="MarginContainer/VBox"]
+layout_mode = 2
+text = "Choose Your Starting Branch"
+horizontal_alignment = 1
+
+[node name="ContentRow" type="HBoxContainer" parent="MarginContainer/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 12
+
+[node name="LeftCol" type="VBoxContainer" parent="MarginContainer/VBox/ContentRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.6
+theme_override_constants/separation = 8
+
+[node name="SliceScroll" type="ScrollContainer" parent="MarginContainer/VBox/ContentRow/LeftCol"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 155)
+horizontal_scroll_mode = 1
+vertical_scroll_mode = 0
+
+[node name="SliceRow" type="HBoxContainer" parent="MarginContainer/VBox/ContentRow/LeftCol/SliceScroll"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="BranchDetailPanel" type="PanelContainer" parent="MarginContainer/VBox/ContentRow/LeftCol"]
+layout_mode = 2
+size_flags_vertical = 3
+visible = false
+
+[node name="BranchDetailScroll" type="ScrollContainer" parent="MarginContainer/VBox/ContentRow/LeftCol/BranchDetailPanel"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 1
+
+[node name="BranchDetailMargin" type="MarginContainer" parent="MarginContainer/VBox/ContentRow/LeftCol/BranchDetailPanel/BranchDetailScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="BranchDetailVBox" type="VBoxContainer" parent="MarginContainer/VBox/ContentRow/LeftCol/BranchDetailPanel/BranchDetailScroll/BranchDetailMargin"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="BranchTitle" type="Label" parent="MarginContainer/VBox/ContentRow/LeftCol/BranchDetailPanel/BranchDetailScroll/BranchDetailMargin/BranchDetailVBox"]
+layout_mode = 2
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 15
+
+[node name="L1Label" type="Label" parent="MarginContainer/VBox/ContentRow/LeftCol/BranchDetailPanel/BranchDetailScroll/BranchDetailMargin/BranchDetailVBox"]
+layout_mode = 2
+text = "Level 1 — Choose your starting skill"
+modulate = Color(1, 0.8, 0.27, 1)
+
+[node name="L1CardsRow" type="HBoxContainer" parent="MarginContainer/VBox/ContentRow/LeftCol/BranchDetailPanel/BranchDetailScroll/BranchDetailMargin/BranchDetailVBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="LevelsVBox" type="VBoxContainer" parent="MarginContainer/VBox/ContentRow/LeftCol/BranchDetailPanel/BranchDetailScroll/BranchDetailMargin/BranchDetailVBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="SoulColumn" type="VBoxContainer" parent="MarginContainer/VBox/ContentRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.0
+custom_minimum_size = Vector2(260, 0)
+theme_override_constants/separation = 8
+
+[node name="SoulSection" type="PanelContainer" parent="MarginContainer/VBox/ContentRow/SoulColumn"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SoulMargin" type="MarginContainer" parent="MarginContainer/VBox/ContentRow/SoulColumn/SoulSection"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="SoulVBox" type="VBoxContainer" parent="MarginContainer/VBox/ContentRow/SoulColumn/SoulSection/SoulMargin"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="SoulLabel" type="Label" parent="MarginContainer/VBox/ContentRow/SoulColumn/SoulSection/SoulMargin/SoulVBox"]
+layout_mode = 2
+text = "Soul Inheritance"
+theme_override_font_sizes/font_size = 13
+
+[node name="SoulInfo" type="Label" parent="MarginContainer/VBox/ContentRow/SoulColumn/SoulSection/SoulMargin/SoulVBox"]
+layout_mode = 2
+text = "No souls available."
+modulate = Color(0.6, 0.6, 0.6, 1)
+autowrap_mode = 3
+theme_override_font_sizes/font_size = 12
+
+[node name="SoulLockedLabel" type="Label" parent="MarginContainer/VBox/ContentRow/SoulColumn/SoulSection/SoulMargin/SoulVBox"]
+layout_mode = 2
+text = "Unlocked at level 3"
+modulate = Color(0.5, 0.5, 0.5, 1)
+autowrap_mode = 3
+theme_override_font_sizes/font_size = 11
+
+[node name="BaseStatsSection" type="PanelContainer" parent="MarginContainer/VBox/ContentRow/SoulColumn"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="StatsMargin" type="MarginContainer" parent="MarginContainer/VBox/ContentRow/SoulColumn/BaseStatsSection"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="BaseStatsVBox" type="VBoxContainer" parent="MarginContainer/VBox/ContentRow/SoulColumn/BaseStatsSection/StatsMargin"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 6
+
+[node name="StatsHeaderRow" type="HBoxContainer" parent="MarginContainer/VBox/ContentRow/SoulColumn/BaseStatsSection/StatsMargin/BaseStatsVBox"]
+layout_mode = 2
+
+[node name="BaseStatsLabel" type="Label" parent="MarginContainer/VBox/ContentRow/SoulColumn/BaseStatsSection/StatsMargin/BaseStatsVBox/StatsHeaderRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Stats"
+theme_override_font_sizes/font_size = 13
+
+[node name="PointsLabel" type="Label" parent="MarginContainer/VBox/ContentRow/SoulColumn/BaseStatsSection/StatsMargin/BaseStatsVBox/StatsHeaderRow"]
+layout_mode = 2
+text = "3 pts"
+modulate = Color(1, 0.85, 0.3, 1)
+theme_override_font_sizes/font_size = 12
+
+[node name="StatsScroll" type="ScrollContainer" parent="MarginContainer/VBox/ContentRow/SoulColumn/BaseStatsSection/StatsMargin/BaseStatsVBox"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 1
+
+[node name="StatsGrid" type="VBoxContainer" parent="MarginContainer/VBox/ContentRow/SoulColumn/BaseStatsSection/StatsMargin/BaseStatsVBox/StatsScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 2
+
+[node name="BottomBar" type="HBoxContainer" parent="MarginContainer/VBox"]
+layout_mode = 2
+alignment = 2
+theme_override_constants/separation = 12
+
+[node name="ErrorLabel" type="Label" parent="MarginContainer/VBox/BottomBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+modulate = Color(1, 0.3, 0.3, 1)
+vertical_alignment = 1
+visible = false
+
+[node name="CancelButton" type="Button" parent="MarginContainer/VBox/BottomBar"]
+layout_mode = 2
+custom_minimum_size = Vector2(120, 40)
+text = "Cancel"
+
+[node name="ConfirmButton" type="Button" parent="MarginContainer/VBox/BottomBar"]
+layout_mode = 2
+custom_minimum_size = Vector2(160, 40)
+text = "Create Character"

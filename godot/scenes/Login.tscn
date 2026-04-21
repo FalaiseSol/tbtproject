@@ -1,0 +1,75 @@
+[gd_scene load_steps=2 format=3 uid="uid://login_scene_001"]
+
+[ext_resource type="Script" path="res://scripts/ui/login.gd" id="1_1"]
+
+[node name="Login" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -160.0
+offset_right = 150.0
+offset_bottom = 160.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="Title" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Login"
+horizontal_alignment = 1
+
+[node name="EmailInput" type="LineEdit" parent="VBoxContainer"]
+layout_mode = 2
+custom_minimum_size = Vector2(300, 40)
+placeholder_text = "Email"
+
+[node name="PasswordInput" type="LineEdit" parent="VBoxContainer"]
+layout_mode = 2
+custom_minimum_size = Vector2(300, 40)
+placeholder_text = "Password"
+secret = true
+
+[node name="RememberMe" type="CheckBox" parent="VBoxContainer"]
+layout_mode = 2
+text = "Remember me"
+
+[node name="LoginButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+custom_minimum_size = Vector2(300, 40)
+text = "Login"
+
+[node name="LoadingLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Loading..."
+horizontal_alignment = 1
+visible = false
+
+[node name="ErrorLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+modulate = Color(1, 0.3, 0.3, 1)
+text = ""
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="RegisterLink" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "No account? Register here"
+flat = true
+
+[node name="BackButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Back to Main Menu"
+flat = true

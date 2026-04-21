@@ -1,45 +1,168 @@
 GAME CONCEPT OVERVIEW
 ---------------------
-Genre: Dark fantasy, turn-based RPG (ATB system), multiplayer
+Genre: Dark fantasy, turn-based RPG (ATB system), multiplayer co-op roguelike
 Perspective: 2D pixel art (top-down or side-view)
-Inspirations: Darkest Dungeon, Final Fantasy VIII, Koudelka, WoW Classic
-Core identity: Classless dark RPG focused on player-driven builds and cooperative dungeon exploration.
+Inspirations: Darkest Dungeon, Final Fantasy VIII, Koudelka, WoW Classic, Shin Megami Tensei 3 & 5
+Core identity: Classless dark RPG focused on player-driven builds, cooperative dungeon exploration,
+and a legacy soul system where death is permanent but your lineage grows stronger over generations.
 
 CORE GAMEPLAY LOOP
 ------------------
-1. Travel between cities through procedurally generated paths.
-2. Encounter enemies scaled to the region level.
-3. Engage in turn-based ATB battles with cinematic entry animations.
-4. Collect gear, resources, and skills.
-5. Return to cities to rest, trade, and prepare for next expeditions.
+1. Party assembles in lobby, each player controls one character.
+2. Enter a procedurally generated dungeon together.
+3. Encounter enemies scaled to the region, engage in ATB turn-based combat.
+4. Collect gear, resources, slice keys (boss drops).
+5. If a player dies, they are out of the run — remaining players can continue or retreat
+   with reduced penalty.
+6. After the run (success, retreat, or full wipe), return to lobby.
+7. Dead players consume inherited slice keys and resources, then create a new character
+   with their soul inheritance.
+8. Regroup and prepare the next expedition.
+
+DEATH & LEGACY (SOUL SYSTEM)
+-----------------------------
+- Death is permanent for a character — no reviving mid-run.
+- On death, a percentage of the character's stats is preserved as a "Soul."
+- The Soul is transferred to the next character created by that player (heir/successor).
+- Souls can stack across generations — each heir inherits from all previous lineage.
+- New characters start weak but gradually accumulate legacy power over generations.
+- The soul system is the player's long-term progression, equivalent to DD's estate upgrades.
+- Veterans aren't directly stronger in raw stats — they are more flexible and better prepared
+  (more slice keys inherited, deeper tree knowledge, soul stat bonuses).
+
+MULTIPLAYER & PARTY DYNAMICS
+-----------------------------
+- Each player controls exactly one character.
+- Party explores dungeons together cooperatively.
+- If one player dies mid-run, they are eliminated from that run.
+- Remaining players may continue the dungeon or retreat to lobby with a reduced penalty
+  (partial loot, reduced soul loss, etc.) to account for being short-handed.
+- There is no full party wipe mechanic — runs end when all remaining players die or retreat.
+- Dead players return to lobby immediately to begin the soul transfer and character creation loop.
+- Cities act as safe hubs between runs: healing, trading, grouping, consuming slice keys.
 
 WORLD & EXPLORATION
 -------------------
-- Cities: Safe hubs for healing, trading, and grouping.
+- Cities: Safe hubs for healing, trading, and regrouping between runs.
 - Dungeons: Procedurally generated areas with traps, enemies, and loot.
 - Overworld: Randomly generated paths between cities, dark atmosphere, gothic tone.
-- Multiplayer: Party-based exploration where only the leader moves to next segments.
-  Other players can search for resources while waiting.
+- Party leader advances to next dungeon segments; other players can search for resources
+  while waiting.
 
 CHARACTER SYSTEM (CLASSLESS)
-----------------------------
+-----------------------------
 - Full customization: posture, corpulence, hair, facial hair, skin color.
-- No classes: players develop through attributes, skills, and magic trees.
-- Skill & Magic Trees: contain active and passive abilities, including speed buffs/debuffs.
-- Trinkets: don’t give stats but enhance or modify specific skills/magic, guiding build direction.
+- No classes: players develop entirely through the radial skill wheel, stats, and equipment.
+- Trinkets: don't give stats but enhance or modify specific skills/magic, guiding build direction.
+- Max level: 100. Players choose exactly 100 skills/stats/passives across their entire build.
+
+BRANCH SYSTEM (formerly Radial Skill Wheel / Slices)
+-----------------------------------------------------
+Terminology: "Slices" are now called BRANCHES.
+
+Structure:
+- 8 branches (N, NE, E, SE, S, SW, W, NW), each with 40 levels of depth.
+- 2-4 choices per level (pick one per level unlocked).
+- Players pick one starting branch at character creation.
+- Each branch contains elemental skills, physical skills, stat upgrades, and passives.
+- Chaos skills sit at level 40 of each branch (deepest, most powerful).
+- A level 100 character can fully explore ~2-2.5 branches, or spread shallower.
+
+MVP: 10 levels per branch implemented.
+- Level 1: Skills ONLY (attack/taunt/spell options)
+- Levels 2-3: Skills + Passives
+- Levels 4-10: Stats only (for now)
+
+Unlocking Adjacent Branches:
+- Each player starts locked to their starting branch.
+- Spend one Branch Key (formerly Slice Key) to unlock an adjacent branch.
+- Crossing multiple borders costs one key per border.
+- Branch borders stay open permanently for that character.
+- On death, unused Branch Keys are inherited (heirloom). Unlocked borders are NOT.
+
+THREAT SYSTEM (hidden battle stat)
+------------------------------------
+- 4 players each have base 25% chance of being targeted by enemies.
+- Taunt adds flat % to self, remainder split equally among others.
+- Example: taunt +50% → 75% on self, 25%/3 ≈ 8.3% on each other player.
+- Threat resets between encounters.
+
+WEAPONS (MVP)
+--------------
+Only weapons + shield implemented for now. Other slots exist but are empty.
+- Short Sword: +5 STR, +5 AGI. Fast, reliable.
+- Long Sword: +10 STR. Slow, high physical damage.
+- Spear: +5 AGI +5 STR. Ignore 50% DEF on basic attack and physical skills.
+- Shield (off-hand): +10 DEF. Enables Block stat.
+
+ELEMENT SYSTEM
+--------------
+10 elements total, organized in 3 rock-paper-scissors triangles + 1 almighty element.
+
+Triangle 1 (Natural):
+  Water beats Fire (50% bonus damage)
+  Fire beats Plant (50% bonus damage)
+  Plant beats Water (50% bonus damage)
+
+Triangle 2 (Material):
+  Thunder beats Metal (50% bonus damage)
+  Metal beats Stone (50% bonus damage)
+  Stone beats Thunder (50% bonus damage)
+
+Triangle 3 (Cosmic):
+  Light beats Shadow (50% bonus damage)
+  Shadow beats Void (50% bonus damage)
+  Void beats Light (50% bonus damage)
+
+Almighty (Chaos) — inspired by Shin Megami Tensei:
+  Bypasses all elemental affinities entirely.
+  Cannot be resisted, absorbed, nullified, or reflected.
+  Rare, high-cost. Found only at the deep end of each slice (row 40).
+  Available on powerful enemies and late-game boss attacks as well.
+
+Elements are distributed across all 8 slices — no slice is purely one element.
+Players naturally specialize in 2-3 elements based on which slices they explore.
 
 STATS
 -----
-Primary: HP, Mana, Stamina
-Attributes: Strength, Agility, Intelligence, Spirit, Defense, Luck, Speed
-Derived: Crit chance, Evasion, Spell Power, Cooldown Reduction, Regen (HP & Mana)
+Primary (flat): HP, Mana, Stamina
+Attributes (flat): Strength, Agility, Intelligence, Spirit, Defense, Luck, Speed
+Derived (percentage %): Crit Chance, Crit Damage, Precision, Evasion/Dodge, Block, Parry, Resistance
+Flat regen (per turn, tick at turn start): HP Regen, Mana Regen
+
+NOTE: No Cooldown Reduction. No Spell Power (magic scales with INT/SPR directly).
+Block requires shield in off-hand. Parry is always active.
+Caps: Dodge max 80%, Resistance max 90%.
+
+Base values at level 1:
+  HP 100, Mana 50, Stamina 100, all attributes 10.
+  Precision 100%, Dodge 2%, Block 5%, Parry 5%, Crit Chance 5%, Crit Damage 100% (x2), Resistance 10%.
+  HP Regen 0/turn, Mana Regen 7/turn.
+
+Stat point costs: HP/Mana/Stamina +10 | Attributes +1 | Precision +5% | Crit Chance +1% | Crit DMG +10% | Dodge +1% | Block +2% | Parry +1% | Resistance +2% | HP Regen +1/turn | Mana Regen +3/turn
+
+Hit chance = Precision - Dodge. At 100% precision vs 20% dodge = 80% hit chance.
+Resistance reduces incoming debuffs and elemental damage (exact formula TBD in combat).
+
+Stat upgrades compete directly with skill and passive choices within the 100-point cap.
+Players must choose carefully — raw stats vs build power is a core tension.
 
 EQUIPMENT
 ---------
 Visible gear on 2D sprite (equipment changes sprite appearance).
-Slots: Head, Chest, Legs, Hands, Feet, Back, Main-hand, Off-hand, Rings(2), Trinkets(2), Neck
+Slots: Head, Chest, Shoulders, Hands, Legs, Feet (armor) | Right Hand, Left Hand (weapons/shields) | Trinket 1, Trinket 2
+  NOTE: Both hand slots are free-choice — double shield, double spear, double dagger all allowed. Maluses TBD later.
 Gear: Random rolls for stats/affixes, rarity tiers (Common → Legendary)
-Trinkets: Modify specific skills/magic rather than stats.
+Bag: 20 inventory slots per character.
+
+TRINKETS
+--------
+- Only 2 types for MVP: Resistance (+resist %), Precision (+hit chance %)
+- Both slots can hold the same type (stacks).
+- Level 1–10. Value: +0.5% per level (Lv.10 = +5%). Two max trinkets = +10%.
+- Upgrade consumable: Spirit Shard — drops at base 20% chance from any enemy on combat end, Luck-modifiable.
+- Trinkets are the ONLY gear that inherits to a new character on death — the actual item (with its level) transfers.
+  All other gear is lost on death.
 
 COMBAT SYSTEM (ATB)
 -------------------
@@ -49,13 +172,23 @@ COMBAT SYSTEM (ATB)
 - Skills have cooldowns; magic uses mana.
 - Status effects: Bleed, Burn, Freeze, Curse, Slow, Haste, etc.
 - HP/Mana regeneration per turn.
+- Elemental affinities apply to all skill/magic damage (see Element System).
+
+BOSS DROPS & SLICE KEYS
+------------------------
+MVP: 3 bosses, each with their own loot table.
+- Slice Keys are not guaranteed drops — RNG chance per boss kill.
+- This makes Slice Key drops feel meaningful and worth celebrating.
+- Slice Keys are the primary cross-generational currency alongside the soul itself.
+- Other boss loot: rare gear, trinkets, crafting materials.
 
 PROGRESSION & LOOT
 ------------------
 - Regions have unique enemies, visuals, and loot tables.
 - Gear drops with variable rolls and rarity.
-- Skills/magic can be found, learned, or earned.
-- Build freedom: player choices define playstyle.
+- Build freedom: player choices across the radial wheel define playstyle entirely.
+- Long-term replayability: 8 slices × 40 rows × 2-4 choices means no two characters
+  will ever be identical. Players will discover new builds across many generations.
 
 ART & ATMOSPHERE
 ----------------
@@ -66,3 +199,5 @@ UI: minimalistic with fantasy/gothic textures.
 DESIGN PHILOSOPHY
 -----------------
 "Your build is your story." Freedom over predefined roles. Every choice shapes your path.
+Death is not failure — it is a chapter ending. Your soul carries forward.
+The longer your lineage, the more tools you have, but skill always matters more than legacy.

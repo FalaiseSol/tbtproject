@@ -87,3 +87,4 @@ node_modules
 godot/.godot/
 godot/android/
 *.import
+godot/firebase.env

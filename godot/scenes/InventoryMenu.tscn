@@ -12,408 +12,319 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+visible = false
 
-[node name="Overlay" type="ColorRect" parent="Control"]
+[node name="Background" type="ColorRect" parent="Control"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 0.5)
+color = Color(0.08, 0.08, 0.10, 1.0)
+mouse_filter = 0
 
-[node name="CharacterViewContainer" type="Control" parent="Control"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -300.0
-offset_top = -150.0
-offset_right = -100.0
-offset_bottom = 150.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="CharacterView" type="ColorRect" parent="Control/CharacterViewContainer"]
+[node name="Panel" type="PanelContainer" parent="Control"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.2, 0.2, 0.2, 1)
+theme_override_styles/panel = null
 
-[node name="HeadSlot" type="ColorRect" parent="Control/CharacterViewContainer"]
+[node name="MainMargin" type="MarginContainer" parent="Control/Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxRoot" type="VBoxContainer" parent="Control/Panel/MainMargin"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="TitleRow" type="HBoxContainer" parent="Control/Panel/MainMargin/VBoxRoot"]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="Control/Panel/MainMargin/VBoxRoot/TitleRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Inventory"
+theme_override_font_sizes/font_size = 20
+
+[node name="CloseButton" type="Button" parent="Control/Panel/MainMargin/VBoxRoot/TitleRow"]
+layout_mode = 2
+custom_minimum_size = Vector2(80, 32)
+text = "Close  [I]"
+
+[node name="ContentRow" type="HBoxContainer" parent="Control/Panel/MainMargin/VBoxRoot"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 20
+
+[node name="EquipPanel" type="VBoxContainer" parent="Control/Panel/MainMargin/VBoxRoot/ContentRow"]
+layout_mode = 2
+size_flags_horizontal = 0
+custom_minimum_size = Vector2(200, 0)
+theme_override_constants/separation = 8
+
+[node name="EquipLabel" type="Label" parent="Control/Panel/MainMargin/VBoxRoot/ContentRow/EquipPanel"]
+layout_mode = 2
+text = "Equipment"
+theme_override_font_sizes/font_size = 13
+modulate = Color(0.75, 0.75, 0.75, 1)
+
+[node name="WeaponsSection" type="VBoxContainer" parent="Control/Panel/MainMargin/VBoxRoot/ContentRow/EquipPanel"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="WeaponsLabel" type="Label" parent="Control/Panel/MainMargin/VBoxRoot/ContentRow/EquipPanel/WeaponsSection"]
+layout_mode = 2
+text = "Weapons"
+theme_override_font_sizes/font_size = 11
+modulate = Color(0.55, 0.55, 0.55, 1)
+
+[node name="WeaponRow" type="HBoxContainer" parent="Control/Panel/MainMargin/VBoxRoot/ContentRow/EquipPanel/WeaponsSection"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="MainHandSlot" type="PanelContainer" parent="Control/Panel/MainMargin/VBoxRoot/ContentRow/EquipPanel/WeaponsSection/WeaponRow"]
+layout_mode = 2
+custom_minimum_size = Vector2(88, 88)
+size_flags_horizontal = 3
+
+[node name="MainHandLabel" type="Label" parent="Control/Panel/MainMargin/VBoxRoot/ContentRow/EquipPanel/WeaponsSection/WeaponRow/MainHandSlot"]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = -0.135
-anchor_top = 0.067
-anchor_right = -0.135
-anchor_bottom = 0.067
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
-grow_horizontal = 2
-color = Color(0.3, 0.3, 0.3, 1)
-
-[node name="NeckSlot" type="ColorRect" parent="Control/CharacterViewContainer"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = -0.135
-anchor_top = 0.224
-anchor_right = -0.135
-anchor_bottom = 0.224
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
-grow_horizontal = 2
-color = Color(0.3, 0.3, 0.3, 1)
-
-[node name="BackSlot" type="ColorRect" parent="Control/CharacterViewContainer"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = -0.135
-anchor_top = 0.38
-anchor_right = -0.135
-anchor_bottom = 0.38
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
-grow_horizontal = 2
-color = Color(0.3, 0.3, 0.3, 1)
-
-[node name="ChestSlot" type="ColorRect" parent="Control/CharacterViewContainer"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = -0.135
-anchor_top = 0.537
-anchor_right = -0.135
-anchor_bottom = 0.537
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
-grow_horizontal = 2
-color = Color(0.3, 0.3, 0.3, 1)
-
-[node name="WristSlot" type="ColorRect" parent="Control/CharacterViewContainer"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = -0.135
-anchor_top = 0.694
-anchor_right = -0.135
-anchor_bottom = 0.694
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
-grow_horizontal = 2
-color = Color(0.3, 0.3, 0.3, 1)
-
-[node name="MainHandSlot" type="ColorRect" parent="Control/CharacterViewContainer"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.34
-anchor_top = 1.117
-anchor_right = 0.34
-anchor_bottom = 1.117
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
-grow_horizontal = 0
-color = Color(0.3, 0.3, 0.3, 1)
-
-[node name="OffHandSlot" type="ColorRect" parent="Control/CharacterViewContainer"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.7
-anchor_top = 1.113
-anchor_right = 0.7
-anchor_bottom = 1.113
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
-color = Color(0.3, 0.3, 0.3, 1)
-
-[node name="HandsSlot" type="ColorRect" parent="Control/CharacterViewContainer"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = -0.135
-anchor_top = 0.851
-anchor_right = -0.135
-anchor_bottom = 0.851
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
-grow_horizontal = 2
-color = Color(0.3, 0.3, 0.3, 1)
-
-[node name="LegsSlot" type="ColorRect" parent="Control/CharacterViewContainer"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 1.135
-anchor_top = 0.067
-anchor_right = 1.135
-anchor_bottom = 0.067
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
-grow_horizontal = 2
-color = Color(0.3, 0.3, 0.3, 1)
-
-[node name="FeetSlot" type="ColorRect" parent="Control/CharacterViewContainer"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 1.135
-anchor_top = 0.224
-anchor_right = 1.135
-anchor_bottom = 0.224
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
-grow_horizontal = 2
-color = Color(0.3, 0.3, 0.3, 1)
-
-[node name="Ring1Slot" type="ColorRect" parent="Control/CharacterViewContainer"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 1.135
-anchor_top = 0.381
-anchor_right = 1.135
-anchor_bottom = 0.381
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
-grow_horizontal = 2
-color = Color(0.3, 0.3, 0.3, 1)
-
-[node name="Ring2Slot" type="ColorRect" parent="Control/CharacterViewContainer"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 1.135
-anchor_top = 0.537
-anchor_right = 1.135
-anchor_bottom = 0.537
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
-grow_horizontal = 2
-color = Color(0.3, 0.3, 0.3, 1)
-
-[node name="Trinket1Slot" type="ColorRect" parent="Control/CharacterViewContainer"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 1.135
-anchor_top = 0.694
-anchor_right = 1.135
-anchor_bottom = 0.694
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
-grow_horizontal = 2
-color = Color(0.3, 0.3, 0.3, 1)
-
-[node name="Trinket2Slot" type="ColorRect" parent="Control/CharacterViewContainer"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 1.135
-anchor_top = 0.851
-anchor_right = 1.135
-anchor_bottom = 0.851
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
-grow_horizontal = 2
-color = Color(0.3, 0.3, 0.3, 1)
-
-[node name="ItemSlotsContainer" type="GridContainer" parent="Control"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 50.0
-offset_top = 50.0
-offset_right = 450.0
-offset_bottom = 190.0
-grow_horizontal = 2
-grow_vertical = 2
-columns = 10
-
-[node name="ItemSlot1" type="ColorRect" parent="Control/ItemSlotsContainer"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-color = Color(0.3, 0.3, 0.3, 1)
-
-[node name="ItemSlot2" type="ColorRect" parent="Control/ItemSlotsContainer"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-color = Color(0.3, 0.3, 0.3, 1)
-
-[node name="ItemSlot3" type="ColorRect" parent="Control/ItemSlotsContainer"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-color = Color(0.3, 0.3, 0.3, 1)
-
-[node name="ItemSlot4" type="ColorRect" parent="Control/ItemSlotsContainer"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-color = Color(0.3, 0.3, 0.3, 1)
-
-[node name="ItemSlot5" type="ColorRect" parent="Control/ItemSlotsContainer"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-color = Color(0.3, 0.3, 0.3, 1)
-
-[node name="ItemSlot6" type="ColorRect" parent="Control/ItemSlotsContainer"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-color = Color(0.3, 0.3, 0.3, 1)
-
-[node name="ItemSlot7" type="ColorRect" parent="Control/ItemSlotsContainer"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-color = Color(0.3, 0.3, 0.3, 1)
-
-[node name="ItemSlot8" type="ColorRect" parent="Control/ItemSlotsContainer"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-color = Color(0.3, 0.3, 0.3, 1)
-
-[node name="ItemSlot9" type="ColorRect" parent="Control/ItemSlotsContainer"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-color = Color(0.3, 0.3, 0.3, 1)
-
-[node name="ItemSlot10" type="ColorRect" parent="Control/ItemSlotsContainer"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-color = Color(0.3, 0.3, 0.3, 1)
-
-[node name="ItemSlot11" type="ColorRect" parent="Control/ItemSlotsContainer"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-color = Color(0.3, 0.3, 0.3, 1)
-
-[node name="ItemSlot12" type="ColorRect" parent="Control/ItemSlotsContainer"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-color = Color(0.3, 0.3, 0.3, 1)
-
-[node name="ItemSlot13" type="ColorRect" parent="Control/ItemSlotsContainer"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-color = Color(0.3, 0.3, 0.3, 1)
-
-[node name="ItemSlot14" type="ColorRect" parent="Control/ItemSlotsContainer"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-color = Color(0.3, 0.3, 0.3, 1)
-
-[node name="ItemSlot15" type="ColorRect" parent="Control/ItemSlotsContainer"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-color = Color(0.3, 0.3, 0.3, 1)
-
-[node name="ItemSlot16" type="ColorRect" parent="Control/ItemSlotsContainer"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-color = Color(0.3, 0.3, 0.3, 1)
-
-[node name="ItemSlot17" type="ColorRect" parent="Control/ItemSlotsContainer"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-color = Color(0.3, 0.3, 0.3, 1)
-
-[node name="ItemSlot18" type="ColorRect" parent="Control/ItemSlotsContainer"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-color = Color(0.3, 0.3, 0.3, 1)
-
-[node name="ItemSlot19" type="ColorRect" parent="Control/ItemSlotsContainer"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-color = Color(0.3, 0.3, 0.3, 1)
-
-[node name="ItemSlot20" type="ColorRect" parent="Control/ItemSlotsContainer"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-color = Color(0.3, 0.3, 0.3, 1)
-
-[node name="ItemSlot21" type="ColorRect" parent="Control/ItemSlotsContainer"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-color = Color(0.3, 0.3, 0.3, 1)
-
-[node name="ItemSlot22" type="ColorRect" parent="Control/ItemSlotsContainer"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-color = Color(0.3, 0.3, 0.3, 1)
-
-[node name="ItemSlot23" type="ColorRect" parent="Control/ItemSlotsContainer"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-color = Color(0.3, 0.3, 0.3, 1)
-
-[node name="ItemSlot24" type="ColorRect" parent="Control/ItemSlotsContainer"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-color = Color(0.3, 0.3, 0.3, 1)
-
-[node name="ItemSlot25" type="ColorRect" parent="Control/ItemSlotsContainer"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-color = Color(0.3, 0.3, 0.3, 1)
-
-[node name="ItemSlot26" type="ColorRect" parent="Control/ItemSlotsContainer"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-color = Color(0.3, 0.3, 0.3, 1)
-
-[node name="ItemSlot27" type="ColorRect" parent="Control/ItemSlotsContainer"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-color = Color(0.3, 0.3, 0.3, 1)
-
-[node name="ItemSlot28" type="ColorRect" parent="Control/ItemSlotsContainer"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-color = Color(0.3, 0.3, 0.3, 1)
-
-[node name="ItemSlot29" type="ColorRect" parent="Control/ItemSlotsContainer"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-color = Color(0.3, 0.3, 0.3, 1)
-
-[node name="ItemSlot30" type="ColorRect" parent="Control/ItemSlotsContainer"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-color = Color(0.3, 0.3, 0.3, 1)
-
-[node name="ExitButton" type="Button" parent="Control"]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
+anchors_preset = 15
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 20.0
-offset_top = -50.0
-offset_right = 120.0
-offset_bottom = -20.0
-grow_horizontal = 0
-grow_vertical = 0
-text = "Exit"
+text = "R. Hand"
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 10
+modulate = Color(0.5, 0.5, 0.5, 1)
+
+[node name="OffHandSlot" type="PanelContainer" parent="Control/Panel/MainMargin/VBoxRoot/ContentRow/EquipPanel/WeaponsSection/WeaponRow"]
+layout_mode = 2
+custom_minimum_size = Vector2(88, 88)
+size_flags_horizontal = 3
+
+[node name="OffHandLabel" type="Label" parent="Control/Panel/MainMargin/VBoxRoot/ContentRow/EquipPanel/WeaponsSection/WeaponRow/OffHandSlot"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "L. Hand"
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 10
+modulate = Color(0.5, 0.5, 0.5, 1)
+
+[node name="ArmorSection" type="VBoxContainer" parent="Control/Panel/MainMargin/VBoxRoot/ContentRow/EquipPanel"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="ArmorLabel" type="Label" parent="Control/Panel/MainMargin/VBoxRoot/ContentRow/EquipPanel/ArmorSection"]
+layout_mode = 2
+text = "Armor"
+theme_override_font_sizes/font_size = 11
+modulate = Color(0.55, 0.55, 0.55, 1)
+
+[node name="ArmorGrid" type="GridContainer" parent="Control/Panel/MainMargin/VBoxRoot/ContentRow/EquipPanel/ArmorSection"]
+layout_mode = 2
+columns = 3
+theme_override_constants/h_separation = 6
+theme_override_constants/v_separation = 6
+
+[node name="HeadSlot" type="PanelContainer" parent="Control/Panel/MainMargin/VBoxRoot/ContentRow/EquipPanel/ArmorSection/ArmorGrid"]
+layout_mode = 2
+custom_minimum_size = Vector2(56, 56)
+
+[node name="HeadLabel" type="Label" parent="Control/Panel/MainMargin/VBoxRoot/ContentRow/EquipPanel/ArmorSection/ArmorGrid/HeadSlot"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "Head"
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 9
+modulate = Color(0.5, 0.5, 0.5, 1)
+
+[node name="ChestSlot" type="PanelContainer" parent="Control/Panel/MainMargin/VBoxRoot/ContentRow/EquipPanel/ArmorSection/ArmorGrid"]
+layout_mode = 2
+custom_minimum_size = Vector2(56, 56)
+
+[node name="ChestLabel" type="Label" parent="Control/Panel/MainMargin/VBoxRoot/ContentRow/EquipPanel/ArmorSection/ArmorGrid/ChestSlot"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "Chest"
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 9
+modulate = Color(0.5, 0.5, 0.5, 1)
+
+[node name="ShouldersSlot" type="PanelContainer" parent="Control/Panel/MainMargin/VBoxRoot/ContentRow/EquipPanel/ArmorSection/ArmorGrid"]
+layout_mode = 2
+custom_minimum_size = Vector2(56, 56)
+
+[node name="ShouldersLabel" type="Label" parent="Control/Panel/MainMargin/VBoxRoot/ContentRow/EquipPanel/ArmorSection/ArmorGrid/ShouldersSlot"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "Shoulders"
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 9
+modulate = Color(0.5, 0.5, 0.5, 1)
+
+[node name="HandsSlot" type="PanelContainer" parent="Control/Panel/MainMargin/VBoxRoot/ContentRow/EquipPanel/ArmorSection/ArmorGrid"]
+layout_mode = 2
+custom_minimum_size = Vector2(56, 56)
+
+[node name="HandsLabel" type="Label" parent="Control/Panel/MainMargin/VBoxRoot/ContentRow/EquipPanel/ArmorSection/ArmorGrid/HandsSlot"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "Hands"
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 9
+modulate = Color(0.5, 0.5, 0.5, 1)
+
+[node name="LegsSlot" type="PanelContainer" parent="Control/Panel/MainMargin/VBoxRoot/ContentRow/EquipPanel/ArmorSection/ArmorGrid"]
+layout_mode = 2
+custom_minimum_size = Vector2(56, 56)
+
+[node name="LegsLabel" type="Label" parent="Control/Panel/MainMargin/VBoxRoot/ContentRow/EquipPanel/ArmorSection/ArmorGrid/LegsSlot"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "Legs"
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 9
+modulate = Color(0.5, 0.5, 0.5, 1)
+
+[node name="FeetSlot" type="PanelContainer" parent="Control/Panel/MainMargin/VBoxRoot/ContentRow/EquipPanel/ArmorSection/ArmorGrid"]
+layout_mode = 2
+custom_minimum_size = Vector2(56, 56)
+
+[node name="FeetLabel" type="Label" parent="Control/Panel/MainMargin/VBoxRoot/ContentRow/EquipPanel/ArmorSection/ArmorGrid/FeetSlot"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "Feet"
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 9
+modulate = Color(0.5, 0.5, 0.5, 1)
+
+[node name="TrinketSection" type="VBoxContainer" parent="Control/Panel/MainMargin/VBoxRoot/ContentRow/EquipPanel"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="TrinketLabel" type="Label" parent="Control/Panel/MainMargin/VBoxRoot/ContentRow/EquipPanel/TrinketSection"]
+layout_mode = 2
+text = "Trinkets  (inherited)"
+theme_override_font_sizes/font_size = 11
+modulate = Color(0.55, 0.55, 0.55, 1)
+
+[node name="TrinketRow" type="HBoxContainer" parent="Control/Panel/MainMargin/VBoxRoot/ContentRow/EquipPanel/TrinketSection"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Trinket1Slot" type="PanelContainer" parent="Control/Panel/MainMargin/VBoxRoot/ContentRow/EquipPanel/TrinketSection/TrinketRow"]
+layout_mode = 2
+custom_minimum_size = Vector2(88, 60)
+size_flags_horizontal = 3
+
+[node name="Trinket1Label" type="Label" parent="Control/Panel/MainMargin/VBoxRoot/ContentRow/EquipPanel/TrinketSection/TrinketRow/Trinket1Slot"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "Trinket 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 10
+modulate = Color(0.5, 0.5, 0.5, 1)
+
+[node name="Trinket2Slot" type="PanelContainer" parent="Control/Panel/MainMargin/VBoxRoot/ContentRow/EquipPanel/TrinketSection/TrinketRow"]
+layout_mode = 2
+custom_minimum_size = Vector2(88, 60)
+size_flags_horizontal = 3
+
+[node name="Trinket2Label" type="Label" parent="Control/Panel/MainMargin/VBoxRoot/ContentRow/EquipPanel/TrinketSection/TrinketRow/Trinket2Slot"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "Trinket 2"
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 10
+modulate = Color(0.5, 0.5, 0.5, 1)
+
+[node name="Divider" type="VSeparator" parent="Control/Panel/MainMargin/VBoxRoot/ContentRow"]
+layout_mode = 2
+
+[node name="BagPanel" type="VBoxContainer" parent="Control/Panel/MainMargin/VBoxRoot/ContentRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="BagLabel" type="Label" parent="Control/Panel/MainMargin/VBoxRoot/ContentRow/BagPanel"]
+layout_mode = 2
+text = "Bag  (0 / 20)"
+theme_override_font_sizes/font_size = 13
+modulate = Color(0.75, 0.75, 0.75, 1)
+
+[node name="BagGrid" type="GridContainer" parent="Control/Panel/MainMargin/VBoxRoot/ContentRow/BagPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+columns = 5
+theme_override_constants/h_separation = 6
+theme_override_constants/v_separation = 6
+
+[node name="Divider2" type="VSeparator" parent="Control/Panel/MainMargin/VBoxRoot/ContentRow"]
+layout_mode = 2
+
+[node name="InfoPanel" type="VBoxContainer" parent="Control/Panel/MainMargin/VBoxRoot/ContentRow"]
+layout_mode = 2
+custom_minimum_size = Vector2(200, 0)
+size_flags_horizontal = 0
+theme_override_constants/separation = 8
+
+[node name="ItemNameLabel" type="Label" parent="Control/Panel/MainMargin/VBoxRoot/ContentRow/InfoPanel"]
+layout_mode = 2
+text = ""
+theme_override_font_sizes/font_size = 15
+
+[node name="ItemTypeLabel" type="Label" parent="Control/Panel/MainMargin/VBoxRoot/ContentRow/InfoPanel"]
+layout_mode = 2
+text = ""
+theme_override_font_sizes/font_size = 11
+modulate = Color(0.6, 0.6, 0.6, 1)
+
+[node name="ItemDescLabel" type="RichTextLabel" parent="Control/Panel/MainMargin/VBoxRoot/ContentRow/InfoPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+fit_content = false
+scroll_active = false
+text = ""
+theme_override_font_sizes/normal_font_size = 12
+
+[node name="ItemActionButton" type="Button" parent="Control/Panel/MainMargin/VBoxRoot/ContentRow/InfoPanel"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 36)
+text = ""
+visible = false

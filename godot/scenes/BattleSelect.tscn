@@ -1,0 +1,117 @@
+[gd_scene load_steps=2 format=3 uid="uid://battle_select_001"]
+
+[ext_resource type="Script" path="res://scripts/ui/battle_select.gd" id="1_1"]
+
+[node name="BattleSelect" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 30
+
+[node name="VBox" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="TitleLabel" type="Label" parent="MarginContainer/VBox"]
+layout_mode = 2
+text = "Select Battle"
+theme_override_font_sizes/font_size = 24
+horizontal_alignment = 1
+
+[node name="BattleList" type="VBoxContainer" parent="MarginContainer/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 12
+
+[node name="DummyCard" type="PanelContainer" parent="MarginContainer/VBox/BattleList"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 80)
+
+[node name="DummyMargin" type="MarginContainer" parent="MarginContainer/VBox/BattleList/DummyCard"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="DummyHBox" type="HBoxContainer" parent="MarginContainer/VBox/BattleList/DummyCard/DummyMargin"]
+layout_mode = 2
+
+[node name="DummyInfo" type="VBoxContainer" parent="MarginContainer/VBox/BattleList/DummyCard/DummyMargin/DummyHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="DummyName" type="Label" parent="MarginContainer/VBox/BattleList/DummyCard/DummyMargin/DummyHBox/DummyInfo"]
+layout_mode = 2
+text = "Training Dummy"
+theme_override_font_sizes/font_size = 16
+
+[node name="DummyDesc" type="Label" parent="MarginContainer/VBox/BattleList/DummyCard/DummyMargin/DummyHBox/DummyInfo"]
+layout_mode = 2
+text = "1 enemy  —  500 HP  —  10% Block  —  Does nothing"
+theme_override_font_sizes/font_size = 11
+modulate = Color(0.7, 0.7, 0.7, 1)
+
+[node name="SelectDummyButton" type="Button" parent="MarginContainer/VBox/BattleList/DummyCard/DummyMargin/DummyHBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(100, 0)
+text = "Select"
+
+[node name="Spacer" type="Control" parent="MarginContainer/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ReadyPanel" type="PanelContainer" parent="MarginContainer/VBox"]
+layout_mode = 2
+visible = false
+
+[node name="ReadyMargin" type="MarginContainer" parent="MarginContainer/VBox/ReadyPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="ReadyVBox" type="VBoxContainer" parent="MarginContainer/VBox/ReadyPanel/ReadyMargin"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="ReadyLabel" type="Label" parent="MarginContainer/VBox/ReadyPanel/ReadyMargin/ReadyVBox"]
+layout_mode = 2
+text = "Waiting for players..."
+horizontal_alignment = 1
+
+[node name="ReadyList" type="VBoxContainer" parent="MarginContainer/VBox/ReadyPanel/ReadyMargin/ReadyVBox"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="BottomRow" type="HBoxContainer" parent="MarginContainer/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="BackButton" type="Button" parent="MarginContainer/VBox/BottomRow"]
+layout_mode = 2
+custom_minimum_size = Vector2(100, 40)
+text = "Back"
+
+[node name="ConfirmButton" type="Button" parent="MarginContainer/VBox/BottomRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 40)
+text = "Confirm"
+disabled = true

@@ -1,0 +1,197 @@
+[gd_scene load_steps=4 format=3 uid="uid://lobby_scene_001"]
+
+[ext_resource type="Script" path="res://scripts/ui/lobby.gd" id="1_1"]
+[ext_resource type="PackedScene" uid="uid://81au4kxx1ois" path="res://scenes/InventoryMenu.tscn" id="2_1"]
+[ext_resource type="PackedScene" uid="uid://char_sheet_001" path="res://scenes/CharacterSheet.tscn" id="3_1"]
+
+[node name="Lobby" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxMain" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="HSplitContainer" type="HBoxContainer" parent="MarginContainer/VBoxMain"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 8
+
+[node name="LeftPanel" type="VBoxContainer" parent="MarginContainer/VBoxMain/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.0
+theme_override_constants/separation = 10
+
+[node name="WelcomeLabel" type="Label" parent="MarginContainer/VBoxMain/HSplitContainer/LeftPanel"]
+layout_mode = 2
+text = "Welcome"
+horizontal_alignment = 1
+
+[node name="OnlineLabel" type="Label" parent="MarginContainer/VBoxMain/HSplitContainer/LeftPanel"]
+layout_mode = 2
+text = "Players Online"
+horizontal_alignment = 1
+
+[node name="PlayerList" type="ItemList" parent="MarginContainer/VBoxMain/HSplitContainer/LeftPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+focus_mode = 0
+
+[node name="LogoutButton" type="Button" parent="MarginContainer/VBoxMain/HSplitContainer/LeftPanel"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 40)
+text = "Logout"
+
+[node name="LoadingLabel" type="Label" parent="MarginContainer/VBoxMain/HSplitContainer/LeftPanel"]
+layout_mode = 2
+text = "Loading..."
+horizontal_alignment = 1
+visible = false
+
+[node name="RightPanel" type="VBoxContainer" parent="MarginContainer/VBoxMain/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.0
+theme_override_constants/separation = 8
+
+[node name="GroupListView" type="VBoxContainer" parent="MarginContainer/VBoxMain/HSplitContainer/RightPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 8
+
+[node name="GroupsLabel" type="Label" parent="MarginContainer/VBoxMain/HSplitContainer/RightPanel/GroupListView"]
+layout_mode = 2
+text = "Groups"
+horizontal_alignment = 1
+
+[node name="CreateGroupButton" type="Button" parent="MarginContainer/VBoxMain/HSplitContainer/RightPanel/GroupListView"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 36)
+text = "Create Group"
+
+[node name="GroupList" type="ItemList" parent="MarginContainer/VBoxMain/HSplitContainer/RightPanel/GroupListView"]
+layout_mode = 2
+size_flags_vertical = 3
+focus_mode = 0
+
+[node name="StartSoloButton" type="Button" parent="MarginContainer/VBoxMain/HSplitContainer/RightPanel/GroupListView"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 40)
+text = "Start Solo"
+
+[node name="GroupDetailView" type="VBoxContainer" parent="MarginContainer/VBoxMain/HSplitContainer/RightPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 8
+visible = false
+
+[node name="TopBar" type="HBoxContainer" parent="MarginContainer/VBoxMain/HSplitContainer/RightPanel/GroupDetailView"]
+layout_mode = 2
+
+[node name="BackButton" type="Button" parent="MarginContainer/VBoxMain/HSplitContainer/RightPanel/GroupDetailView/TopBar"]
+layout_mode = 2
+text = "X"
+custom_minimum_size = Vector2(36, 36)
+
+[node name="GroupNameEdit" type="LineEdit" parent="MarginContainer/VBoxMain/HSplitContainer/RightPanel/GroupDetailView/TopBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Group name"
+editable = false
+
+[node name="MemberList" type="ItemList" parent="MarginContainer/VBoxMain/HSplitContainer/RightPanel/GroupDetailView"]
+layout_mode = 2
+size_flags_vertical = 3
+focus_mode = 0
+
+[node name="OpenToggleButton" type="Button" parent="MarginContainer/VBoxMain/HSplitContainer/RightPanel/GroupDetailView"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 32)
+text = "Open: ON"
+visible = false
+
+[node name="StartButton" type="Button" parent="MarginContainer/VBoxMain/HSplitContainer/RightPanel/GroupDetailView"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 40)
+text = "Start Game"
+
+[node name="EventLogPanel" type="PanelContainer" parent="MarginContainer/VBoxMain"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 120)
+
+[node name="VBox" type="VBoxContainer" parent="MarginContainer/VBoxMain/EventLogPanel"]
+layout_mode = 2
+
+[node name="LogLabel" type="Label" parent="MarginContainer/VBoxMain/EventLogPanel/VBox"]
+layout_mode = 2
+text = "Event Log"
+horizontal_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxMain/EventLogPanel/VBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 80)
+size_flags_vertical = 3
+
+[node name="LogText" type="RichTextLabel" parent="MarginContainer/VBoxMain/EventLogPanel/VBox/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+bbcode_enabled = true
+selection_enabled = false
+scroll_active = false
+fit_content = true
+
+[node name="HintBar" type="PanelContainer" parent="MarginContainer/VBoxMain"]
+layout_mode = 2
+
+[node name="HintMargin" type="MarginContainer" parent="MarginContainer/VBoxMain/HintBar"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="HintHBox" type="HBoxContainer" parent="MarginContainer/VBoxMain/HintBar/HintMargin"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="HintInventory" type="Label" parent="MarginContainer/VBoxMain/HintBar/HintMargin/HintHBox"]
+layout_mode = 2
+text = "[I]  Inventory"
+theme_override_font_sizes/font_size = 11
+modulate = Color(0.7, 0.7, 0.7, 1)
+
+[node name="HintCharacter" type="Label" parent="MarginContainer/VBoxMain/HintBar/HintMargin/HintHBox"]
+layout_mode = 2
+text = "[C]  Character"
+theme_override_font_sizes/font_size = 11
+modulate = Color(0.7, 0.7, 0.7, 1)
+
+[node name="ContextMenu" type="PopupMenu" parent="."]
+size = Vector2i(120, 40)
+
+[node name="InvitePopup" type="AcceptDialog" parent="."]
+title = "Invite"
+ok_button_text = "Accept"
+
+[node name="InventoryMenu" parent="." instance=ExtResource("2_1")]
+
+[node name="CharacterSheet" parent="." instance=ExtResource("3_1")]

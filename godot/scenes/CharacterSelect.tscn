@@ -1,0 +1,96 @@
+[gd_scene load_steps=2 format=3 uid="uid://char_select_001"]
+
+[ext_resource type="Script" path="res://scripts/ui/character_select.gd" id="1_1"]
+
+[node name="CharacterSelect" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBox" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Title" type="Label" parent="MarginContainer/VBox"]
+layout_mode = 2
+text = "Select Your Character"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 24
+
+[node name="CardsRow" type="HBoxContainer" parent="MarginContainer/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 16
+
+[node name="Card0" type="PanelContainer" parent="MarginContainer/VBox/CardsRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 420)
+
+[node name="CardContent0" type="VBoxContainer" parent="MarginContainer/VBox/CardsRow/Card0"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Card1" type="PanelContainer" parent="MarginContainer/VBox/CardsRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 420)
+
+[node name="CardContent1" type="VBoxContainer" parent="MarginContainer/VBox/CardsRow/Card1"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Card2" type="PanelContainer" parent="MarginContainer/VBox/CardsRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 420)
+
+[node name="CardContent2" type="VBoxContainer" parent="MarginContainer/VBox/CardsRow/Card2"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="EnterLobbyButton" type="Button" parent="MarginContainer/VBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 48)
+text = "Enter Lobby"
+disabled = true
+
+[node name="DeleteConfirmDialog" type="ConfirmationDialog" parent="."]
+title = "Delete Character"
+min_size = Vector2i(400, 160)
+ok_button_text = "Delete"
+
+[node name="VBox" type="VBoxContainer" parent="DeleteConfirmDialog"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -48.0
+
+[node name="Label" type="Label" parent="DeleteConfirmDialog/VBox"]
+layout_mode = 2
+text = "Type DELETE to confirm:"
+autowrap_mode = 3
+
+[node name="DeleteInput" type="LineEdit" parent="DeleteConfirmDialog/VBox"]
+layout_mode = 2
+placeholder_text = "DELETE"

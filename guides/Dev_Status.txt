@@ -1,0 +1,170 @@
+DEVELOPMENT STATUS — TBT PROJECT
+Last updated: 2026-04-21
+
+ENGINE & STACK
+--------------
+Engine: Godot 4.5 (Forward Plus renderer)
+Backend: Firebase (Auth + Firestore + Realtime Database)
+Plugin: godot-firebase + http-sse-client (addons)
+Platform target: Windows (PC)
+
+WHAT IS DONE
+------------
+
+[AUTH]
+- Register screen: username + email + password + confirm
+  - Validates all fields, min length, password match
+  - Creates Firebase Auth account
+  - Saves username + created_at to Firestore (users/{uid})
+- Login screen: email + password
+  - Fetches username from Firestore on success
+  - Remember Me: saves email to user://login_prefs.cfg (never password)
+  - Error feedback on both screens
+
+[CHARACTER]
+- Character selection: 3 slots per account, loaded from Firestore
+  - Slot shows name, branch color bar, stat grid, level, generation
+  - Delete with typed confirmation ("DELETE")
+  - Select to enter lobby
+- Character creation:
+  - Name input (auto-capitalized, letters only)
+  - Weapon selection (main hand only, from branch_data.gd WEAPONS)
+  - Branch selection (8 branches as colored slice cards)
+  - L1 skill/passive selection (shown per branch)
+  - Branch detail panel: L1 interactive cards + L2-10 display cards
+  - Stat allocation: 3 points to spend, +/- buttons, live preview
+  - Passive stat bonuses applied live to stat display
+  - Confirms and saves to Firestore: users/{uid}/characters/slot_N
+  - Saved fields: name, branch, generation, level, created_at, stats, skills, weapon
+- Character sheet (keybind C):
+  - Shows stats split into Base / Pts / Items / Passives / Total columns
+  - Lists weapon, skills, passives, stat nodes
+- Inventory (keybind I):
+  - 20 bag slots + equipment slots (main_hand, off_hand, head, chest, shoulders, hands, legs, feet, trinket_1, trinket_2)
+  - Equip / Unequip items
+  - Item info panel with stats and description
+  - Trinket display with level and upgrade hint
+  - State persists within session (no duplication on reopen)
+  - Equip/unequip syncs back to GameManager so character sheet reflects changes
+
+[LOBBY]
+- Live online player list via Firebase Realtime Database SSE
+  - Heartbeat every 15s written to lobby/{uid}: { username, heartbeat }
+  - Stale players (no heartbeat in 45s) pruned by any active client
+  - Player disappears on logout or heartbeat timeout
+- Welcome label shows logged-in username
+- Logout: removes player from lobby, clears invites, clears group, returns to main menu
+- Right-click player → context menu: Invite, Inspect, Leave Group (self)
+  - Inspect: fetches target's active character and logs stats to event log
+- Group system:
+  - Create group (default open)
+  - Group list with member count (X/4)
+  - Double-click group to view detail
+  - Host can rename group, toggle Open/Closed, start game
+  - Right-click open group in list to join directly
+  - Invite system: sends to invites/{target_uid}, popup on target side
+  - Leave group (host disbands, member leaves)
+  - Stale group cleanup on login
+- Event log: timestamped messages for all lobby events
+- Stale invite cleanup on lobby entry and logout
+- Hint bar: shows [I] Inventory and [C] Character keybinds
+
+[BATTLE SELECT]
+- Host-only access from lobby Start Solo / Start Game buttons
+- Shows available encounters (currently: Training Dummy)
+- Select encounter → Confirm
+- Solo: launches immediately
+- Group: ready-check panel — all members must confirm before battle starts
+  - Ready states written to ready/{group_id} in Realtime Database
+  - Cleaned up on launch and on back
+
+[BATTLE — ATB COMBAT]
+- Tick-based ATB: each macro-step advances time by min((100-atb)/speed) across all units
+  - A unit with 30 SPD fills ATB twice as fast as one with 15 SPD
+  - Fastest unit always reaches 100 first; all others advance proportionally that step
+  - Ties resolved randomly (shuffle)
+  - ATB bars visible on all combatant panels, animate at 0.25s per tick
+- Party on the left (up to 4 slots), enemies on the right (up to 4 slots)
+- Each combatant panel: name, HP bar with value, ATB bar
+- Dead combatants grayed out
+- Turn flow: ATB fills → unit at 100 acts → ATB resets to 0 → repeat
+- Only the local player's turn enables action buttons; others see "Waiting for X..."
+- Enemy AI: dummy does nothing (placeholder)
+- Basic attack action:
+  - Select Attack → target list appears → click target → resolves
+  - Resolution order: Precision vs Dodge (miss) → Block (shield required) → Parry → Hit
+  - Damage formula per weapon:
+    - Dagger:      2–3  + AGI - enemy DEF
+    - Broad Sword: 2–6  + STR - enemy DEF
+    - Spear:       3–4  + 50% STR + 50% AGI - 50% enemy DEF (ignores 50% DEF)
+    - Unarmed:     1–2  + STR - enemy DEF
+  - Crit: rolls crit_chance, applies (1 + crit_damage) multiplier
+  - All outcomes logged: miss, block, parry, hit (damage), crit (damage)
+- Battle log: timestamped BBCode-colored entries, auto-scrolls to bottom
+- Victory: overlay popup with "Victory!" title and "Back to Lobby" button
+  - Placeholder space for future XP and loot display
+- Defeat: all players dead → auto-return to lobby after 2s
+- Training Dummy stats: 500 HP, 5 DEF, 10% Block, SPD 8, does nothing
+
+[BACKEND / INFRA]
+- Firebase project: tbtproject-d415a (europe-west1)
+- Firestore rules: authenticated read-all, write own doc only
+- Realtime Database rules: authenticated read/write
+- GameManager autoload:
+  - current_user_id, current_username, current_character_id, current_character
+  - battle_party: Array of { uid, username, character }
+  - is_host: bool
+  - current_group_id: String
+  - logout() clears all fields
+
+[NAVIGATION FLOW]
+Main Menu → Login → Lobby
+Main Menu → Register → Lobby
+Lobby → Character Select → Character Create → Character Select
+Lobby → Inventory (overlay, keybind I)
+Lobby → Character Sheet (overlay, keybind C)
+Lobby → Start Solo → Battle Select → Battle → Lobby
+Lobby → Start Game (host) → Battle Select → Battle → Lobby
+
+SCENES
+------
+Main.tscn           — main menu (play, options, quit)
+Login.tscn          — login form with remember-me
+Register.tscn       — registration form
+CharacterSelect.tscn — 3-slot character picker
+CharacterCreate.tscn — full character creation (branch, weapon, stats, L1 skill)
+Lobby.tscn          — live player list, groups, event log, inventory/sheet overlays
+BattleSelect.tscn   — encounter picker with ready-check
+Battle.tscn         — ATB combat scene
+CharacterSheet.tscn — overlay (CanvasLayer)
+InventoryMenu.tscn  — overlay (CanvasLayer)
+Options.tscn        — placeholder
+
+WHAT IS NOT DONE (NEXT STEPS)
+------------------------------
+[ ] Skills in combat (branch_data skills usable in battle)
+[ ] Magic / mana usage in combat
+[ ] Status effects (bleed, burn, poison, slow, stun, etc.) — schema exists in branch_data.gd
+[ ] HP/Mana regeneration per turn
+[ ] Elemental damage and affinities
+[ ] Enemy AI beyond "do nothing"
+[ ] Real enemy roster (beyond Training Dummy)
+[ ] XP and loot on victory
+[ ] Soul system on character death
+[ ] Branch key drops and heirloom system
+[ ] Procedural dungeon generation
+[ ] Multiple rooms / dungeon exploration
+[ ] Boss encounters (MVP: 3 bosses)
+[ ] Shield given to character on creation (off-hand slot)
+[ ] Art pass: replace placeholder UI with pixel art assets
+[ ] Multiplayer: sync battle state across clients (currently local-only)
+[ ] GitHub Actions build pipeline + launcher for testers
+[ ] Threat system in combat (taunt skills affect targeting)
+
+KNOWN LIMITATIONS (CURRENT BUILD)
+-----------------------------------
+- Battle is local only — multiplayer combat sync not implemented
+- No actual dungeon — battle launches directly from lobby (test flow)
+- Inventory and character sheet in lobby are functional but not connected to battle stats live
+- UI uses default Godot theme (no art pass yet)
+- Only main_hand weapon slot is assigned at character creation (no starting shield)

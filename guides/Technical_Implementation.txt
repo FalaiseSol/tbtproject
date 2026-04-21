@@ -1,0 +1,201 @@
+TECHNICAL IMPLEMENTATION — TBT PROJECT
+Last updated: 2026-04-19
+
+PROJECT STRUCTURE
+-----------------
+Engine: Godot 4.5 (Forward Plus renderer)
+Project root: godot/
+Main scene: res://scenes/Main.tscn
+
+godot/
+├── addons/
+│   ├── godot-firebase/         Firebase plugin
+│   │   └── .env                Firebase config (MUST be exactly here)
+│   └── http-sse-client/        Required dependency for Realtime Database SSE
+├── scenes/
+│   ├── Main.tscn               Main menu
+│   ├── Login.tscn              Login form
+│   ├── Register.tscn           Register form
+│   ├── Lobby.tscn              Live player lobby
+│   ├── Options.tscn            Placeholder
+│   ├── InventoryMenu.tscn      Placeholder
+│   ├── Character.tscn          Placeholder (legacy, unused)
+│   ├── Game.tscn               Placeholder (legacy, unused)
+│   └── PauseMenu.tscn          Placeholder (legacy, unused)
+├── scripts/
+│   ├── game/
+│   │   └── game_manager.gd     Autoload: session state
+│   └── ui/
+│       ├── main_menu.gd
+│       ├── login.gd
+│       ├── register.gd
+│       ├── lobby.gd
+│       ├── options_menu.gd
+│       └── inventory_menu.gd
+└── guides/                     Design and technical docs (this folder)
+
+FIREBASE PROJECT
+----------------
+Project ID: tbtproject-d415a
+Region: europe-west1
+Console: https://console.firebase.google.com/project/tbtproject-d415a
+Firebase CLI login: florian.lemyre@gmail.com
+firebase.json + rules live at: C:\Users\PC\Documents\code\tbtproject\
+
+Services in use:
+- Authentication: Email/Password provider enabled
+- Firestore: production mode, custom rules deployed
+- Realtime Database: europe-west1, custom rules deployed
+
+FIREBASE CONFIG FILE
+--------------------
+Path: res://addons/godot-firebase/.env
+This path is hardcoded inside the plugin — it will not work anywhere else.
+
+Contents:
+  [firebase/environment_variables]
+  "apiKey"="..."
+  "authDomain"="tbtproject-d415a.firebaseapp.com"
+  "databaseURL"="https://tbtproject-d415a-default-rtdb.europe-west1.firebasedatabase.app"
+  "projectId"="tbtproject-d415a"
+  "databaseName"="(default)"
+  "storageBucket"="tbtproject-d415a.firebasestorage.app"
+  "messagingSenderId"="722413064558"
+  "appId"="1:722413064558:web:..."
+
+AUTOLOADS (project.godot)
+--------------------------
+Firebase   = res://addons/godot-firebase/firebase/firebase.tscn
+GameManager = res://scripts/game/game_manager.gd
+
+GAMEMANAGER (scripts/game/game_manager.gd)
+------------------------------------------
+Holds session state across scenes.
+  var current_user_id: String
+  var current_username: String
+  func is_logged_in() -> bool
+  func logout()   — clears both vars + calls Firebase.Auth.logout()
+
+FIREBASE PLUGIN API (godot-firebase)
+-------------------------------------
+Source files are in addons/godot-firebase/ — always read them before calling.
+Auth result dictionary keys are ALL lowercase (e.g. "localid" not "localId").
+
+AUTH — Firebase.Auth
+  signup_with_email_and_password(email, password)
+  login_with_email_and_password(email, password)
+  logout()
+  Signals:
+    signup_succeeded(auth_result: Dictionary)
+    signup_failed(error_code: int, message: String)
+    login_succeeded(auth_result: Dictionary)
+    login_failed(error_code: int, message: String)
+
+FIRESTORE — Firebase.Firestore
+  Firebase.Firestore.collection("name") → FirestoreCollection
+  Methods on FirestoreCollection:
+    get_doc(id)              awaitable → FirestoreDocument (.doc_fields: Dictionary)
+    set_doc(id, data)        void, fire-and-forget (no await)
+    add(id, data)
+    update(document)
+  IMPORTANT: there is NO document() method — calling it crashes with "nonexistent function"
+  IMPORTANT: Firestore has NO real-time listener in this plugin — use Realtime Database for live data
+
+REALTIME DATABASE — Firebase.Database
+  Firebase.Database.get_database_reference("path") → FirebaseDatabaseReference
+    — instantiates a scene node, adds it as child, opens SSE connection in _ready()
+  Methods on FirebaseDatabaseReference:
+    update(path, data: Dictionary)   PATCH — merges data at path
+    put(path, data: Dictionary)      PUT — overwrites at path
+    delete(reference: String)        DELETE — removes key at path
+    get_data() → Dictionary          returns local cached copy
+  Signals:
+    new_data_update(resource: FirebaseResource)    fired on PUT events
+    patch_data_update(resource: FirebaseResource)  fired on PATCH events
+    delete_data_update(resource: FirebaseResource) fired on DELETE events
+  FirebaseResource fields:
+    .path  String  (e.g. "/uid123")
+    .data  value at that path (String, Dictionary, null, etc.)
+  Initial load behavior:
+    On connect, Firebase sends a PUT with all existing data.
+    If data exists at root, new_data_update fires ONCE PER KEY (not once for the whole object).
+    If the node is empty, nothing fires — handle the empty state explicitly.
+
+FIRESTORE SECURITY RULES (firestore.rules)
+------------------------------------------
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /users/{userId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null && request.auth.uid == userId;
+    }
+  }
+}
+Deploy: firebase deploy --only firestore:rules --project tbtproject-d415a
+
+REALTIME DATABASE RULES (database.rules.json)
+----------------------------------------------
+{
+  "rules": {
+    "lobby": {
+      ".read": "auth != null",
+      ".write": "auth != null"
+    }
+  }
+}
+Deploy: firebase deploy --only database --project tbtproject-d415a
+
+FIRESTORE DATA MODEL
+---------------------
+Collection: users
+  Document ID: {uid}
+  Fields:
+    username: String
+    created_at: Unix timestamp (int)
+
+REALTIME DATABASE DATA MODEL
+------------------------------
+/lobby
+  {uid}: username (String)   — present while player is online, deleted on logout
+
+SCENE FLOW
+----------
+Main.tscn
+  → Login.tscn   → (success) → Lobby.tscn → (logout) → Main.tscn
+  → Register.tscn → (success) → Lobby.tscn → (logout) → Main.tscn
+
+REGISTER FLOW (register.gd)
+----------------------------
+1. Validate: all fields filled, username >= 3 chars, passwords match, password >= 6 chars
+2. Firebase.Auth.signup_with_email_and_password(email, password)
+3. On signup_succeeded: store uid+username in GameManager, set_doc to Firestore, go to Lobby
+4. On signup_failed: re-enable button, show error
+
+LOGIN FLOW (login.gd)
+----------------------
+1. Firebase.Auth.login_with_email_and_password(email, password)
+2. On login_succeeded: store uid in GameManager, await Firestore get_doc to fetch username, go to Lobby
+3. On login_failed: re-enable button, show error
+
+LOBBY FLOW (lobby.gd)
+----------------------
+- On _ready: get_database_reference("lobby"), connect signals, call _set_online(true)
+- _set_online(true): ref.update("/", {uid: username})
+- _set_online(false): ref.delete(uid)
+- _on_player_update: update _online_players dict, refresh ItemList
+- _on_player_patch: merge changes into _online_players, refresh ItemList
+- _on_player_delete: remove from _online_players, refresh ItemList
+- Logout: delete uid from DB, wait 0.3s for request to send, GameManager.logout(), change scene
+- _notification EXIT_TREE / PREDELETE: safety delete in case of crash/alt-f4
+
+KNOWN ISSUES / GOTCHAS
+-----------------------
+- Firestore write on register is fire-and-forget — if it fails silently, the user will have
+  no username doc. Login handles this gracefully (falls back to "Unknown") but the doc
+  won't exist. Fix: add a fallback write in login if doc is missing.
+- The 0.3s timer on logout is a workaround — the HTTP DELETE needs time to fire before
+  the scene (and the DatabaseReference node) is destroyed.
+- If a player crashes without logging out, their entry stays in /lobby permanently.
+  Fix (future): use Firebase Realtime Database onDisconnect() — not currently supported
+  by this plugin. Alternative: timestamp-based cleanup job.

@@ -1,0 +1,177 @@
+[gd_scene load_steps=2 format=3 uid="uid://battle_scene_001"]
+
+[ext_resource type="Script" path="res://scripts/ui/battle.gd" id="1_1"]
+
+[node name="Battle" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1")
+
+[node name="BG" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.06, 0.06, 0.10, 1.0)
+mouse_filter = 2
+
+[node name="MainMargin" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 12
+
+[node name="VBoxRoot" type="VBoxContainer" parent="MainMargin"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="CombatantsRow" type="HBoxContainer" parent="MainMargin/VBoxRoot"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 20
+
+[node name="PartyPanel" type="VBoxContainer" parent="MainMargin/VBoxRoot/CombatantsRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 6
+
+[node name="PartyLabel" type="Label" parent="MainMargin/VBoxRoot/CombatantsRow/PartyPanel"]
+layout_mode = 2
+text = "Party"
+theme_override_font_sizes/font_size = 12
+modulate = Color(0.6, 0.6, 0.6, 1)
+
+[node name="PartySlots" type="VBoxContainer" parent="MainMargin/VBoxRoot/CombatantsRow/PartyPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 8
+
+[node name="VSep" type="VSeparator" parent="MainMargin/VBoxRoot/CombatantsRow"]
+layout_mode = 2
+modulate = Color(1, 1, 1, 0.12)
+
+[node name="EnemyPanel" type="VBoxContainer" parent="MainMargin/VBoxRoot/CombatantsRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 6
+
+[node name="EnemyLabel" type="Label" parent="MainMargin/VBoxRoot/CombatantsRow/EnemyPanel"]
+layout_mode = 2
+text = "Enemies"
+theme_override_font_sizes/font_size = 12
+modulate = Color(0.6, 0.6, 0.6, 1)
+
+[node name="EnemySlots" type="VBoxContainer" parent="MainMargin/VBoxRoot/CombatantsRow/EnemyPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 8
+
+[node name="BottomSection" type="VBoxContainer" parent="MainMargin/VBoxRoot"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="HSep" type="HSeparator" parent="MainMargin/VBoxRoot/BottomSection"]
+layout_mode = 2
+modulate = Color(1, 1, 1, 0.15)
+
+[node name="ActionRow" type="HBoxContainer" parent="MainMargin/VBoxRoot/BottomSection"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="ActionButtons" type="VBoxContainer" parent="MainMargin/VBoxRoot/BottomSection/ActionRow"]
+layout_mode = 2
+custom_minimum_size = Vector2(140, 0)
+theme_override_constants/separation = 6
+
+[node name="AttackButton" type="Button" parent="MainMargin/VBoxRoot/BottomSection/ActionRow/ActionButtons"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 36)
+text = "Attack"
+disabled = true
+
+[node name="TargetButtons" type="VBoxContainer" parent="MainMargin/VBoxRoot/BottomSection/ActionRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 6
+
+[node name="LogPanel" type="PanelContainer" parent="MainMargin/VBoxRoot/BottomSection"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 100)
+
+[node name="LogScroll" type="ScrollContainer" parent="MainMargin/VBoxRoot/BottomSection/LogPanel"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="LogText" type="RichTextLabel" parent="MainMargin/VBoxRoot/BottomSection/LogPanel/LogScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+bbcode_enabled = true
+selection_enabled = false
+scroll_active = false
+fit_content = true
+
+[node name="VictoryOverlay" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.65)
+mouse_filter = 0
+visible = false
+
+[node name="VictoryPanel" type="PanelContainer" parent="VictoryOverlay"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -180.0
+offset_top = -120.0
+offset_right = 180.0
+offset_bottom = 120.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VictoryMargin" type="MarginContainer" parent="VictoryOverlay/VictoryPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="VictoryVBox" type="VBoxContainer" parent="VictoryOverlay/VictoryPanel/VictoryMargin"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="VictoryTitle" type="Label" parent="VictoryOverlay/VictoryPanel/VictoryMargin/VictoryVBox"]
+layout_mode = 2
+text = "Victory!"
+theme_override_font_sizes/font_size = 28
+horizontal_alignment = 1
+modulate = Color(0.4, 1.0, 0.55, 1)
+
+[node name="RewardsSpacer" type="Control" parent="VictoryOverlay/VictoryPanel/VictoryMargin/VictoryVBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 8)
+
+[node name="LobbyButton" type="Button" parent="VictoryOverlay/VictoryPanel/VictoryMargin/VictoryVBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 40)
+text = "Back to Lobby"

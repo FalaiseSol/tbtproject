@@ -1,0 +1,25 @@
+{
+  "rules": {
+    "lobby": {
+      ".read": "auth != null",
+      ".write": "auth != null"
+    },
+    "groups": {
+      ".read": "auth != null",
+      "$groupId": {
+        ".write": "auth != null",
+        "members": {
+          "$uid": {
+            ".write": "auth != null && (auth.uid == $uid || root.child('groups').child($groupId).child('host').val() == auth.uid)"
+          }
+        }
+      }
+    },
+    "invites": {
+      "$uid": {
+        ".read": "auth != null && auth.uid == $uid",
+        ".write": "auth != null"
+      }
+    }
+  }
+}
