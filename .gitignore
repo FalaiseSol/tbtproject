@@ -88,3 +88,11 @@ godot/.godot/
 godot/android/
 *.import
 godot/firebase.env
+
+# Launcher build artifacts and downloaded game files
+launcher/dist/
+launcher/build/
+launcher/*.spec
+launcher/TBT.exe
+launcher/TBT.pck
+launcher/version.txt
