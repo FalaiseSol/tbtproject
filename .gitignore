@@ -88,6 +88,7 @@ godot/.godot/
 godot/android/
 *.import
 godot/firebase.env
+godot/addons/godot-firebase/.env
 
 # Launcher build artifacts and downloaded game files
 launcher/dist/
