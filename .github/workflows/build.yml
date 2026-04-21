@@ -27,7 +27,9 @@ jobs:
           mv /tmp/templates/templates/* ~/.local/share/godot/export_templates/4.5.stable/
 
       - name: Write firebase.env
-        run: echo "${{ secrets.FIREBASE_ENV }}" > godot/firebase.env
+        env:
+          FIREBASE_ENV: ${{ secrets.FIREBASE_ENV }}
+        run: printf '%s' "$FIREBASE_ENV" > godot/firebase.env
 
       - name: Export Windows build
         run: |
