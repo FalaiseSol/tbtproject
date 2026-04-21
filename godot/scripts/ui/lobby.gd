@@ -256,12 +256,17 @@ func _refresh_member_list() -> void:
 # ── Stale cleanup ─────────────────────────────────────────────────────────────
 
 func _cleanup_stale_groups() -> void:
+	var stale_groups: Array = []
 	await get_tree().create_timer(1.0).timeout
 	for gid in _groups.keys():
+		if gid == _my_group_id:
+			continue
 		var g = _groups[gid]
 		if g.get("host", "") == GameManager.current_user_id:
-			_groups_ref.delete(gid)
-			_log("Cleaned up stale group from previous session.")
+			stale_groups.append(gid)
+	for gid in stale_groups:
+		_groups_ref.delete(gid)
+		_log("Cleaned up stale group from previous session.")
 
 # ── Group actions ─────────────────────────────────────────────────────────────
 
@@ -385,7 +390,8 @@ func _show_context_menu_for(uid: String, uname: String, is_self: bool) -> void:
 		if _my_group_id != "":
 			context_menu.add_item("Leave Group", 1)
 	else:
-		context_menu.add_item("Invite", 0)
+		if _my_group_id != "":
+			context_menu.add_item("Invite", 0)
 	context_menu.add_item("Inspect", 2)
 	context_menu.popup(Rect2i(get_global_mouse_position(), Vector2i(140, 40)))
 
